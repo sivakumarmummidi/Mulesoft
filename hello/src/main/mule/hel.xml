@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="73443083-a3a2-443d-a5dc-97580eac42be" >
+		<http:listener-connection host="localhost" port="8081" />
+	</http:listener-config>
+	<file:config name="File_Config" doc:name="File Config" doc:id="ae8e0fec-4107-43d9-bb82-30467222d176" />
+	<flow name="helFlow" doc:id="a8e9f85e-157b-414a-b510-c00d487cc4f3" >
+		<http:listener doc:name="Listener" doc:id="ab82c3ed-1874-45d7-896d-71ffc871eb2d" config-ref="HTTP_Listener_config" path="/file"/>
+		<file:copy doc:name="Copy" doc:id="bc18be33-ebd3-45ea-b32d-a1f86f60751c" config-ref="File_Config" sourcePath="D:\New folder\socs\siva\rr.txt" targetPath="D:\New folder\socs\siva.txt"/>
+		<logger level="INFO" doc:name="Logger" doc:id="5b4b6077-b6b9-497a-8ddc-d3040032a07b" message="#[payload]"/>
+	</flow>
+</mule>
